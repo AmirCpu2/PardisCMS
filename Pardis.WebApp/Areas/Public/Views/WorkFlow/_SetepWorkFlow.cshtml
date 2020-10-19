@@ -1,0 +1,52 @@
+﻿@model Pardis.Product.BLL.ViewModel.WorkFlow
+
+@{
+    var WorkFlowNameFa = Model?.NameFa;
+    string iClass = "";
+    int loopCounter = 0;
+}
+<!-- Main row -->
+<div class="row">
+    <section class="col-lg col-12">
+        <div class="card card-body">
+            @if (WorkFlowNameFa != null)
+            {
+                WorkFlowNameFa = "فرآیند " + WorkFlowNameFa;
+                <div class="text-center  sf-nav-link" style="padding: 0px; border-bottom: inset;">@WorkFlowNameFa</div>
+            }
+            <div class="stepwizard">
+                <div class="stepwizard-row setup-panel">
+                    @foreach (var item in Model.Steps)
+                    {
+                        switch (item.Status)
+                        {
+                            case Pardis.Enums.WorkFlowStatus.done:
+                                iClass = "btn-success";
+                                break;
+                            case Pardis.Enums.WorkFlowStatus.undone:
+                                iClass = "";
+                                break;
+                            case Pardis.Enums.WorkFlowStatus.disable:
+                                iClass = " btn-default";
+                                break;
+                            case Pardis.Enums.WorkFlowStatus.current:
+                                iClass = "currentStep active btn-default";
+                                break;
+                            case Pardis.Enums.WorkFlowStatus.losed:
+                                iClass = "btn-danger";
+                                break;
+                        }
+
+                        <div class="stepwizard-step" id="@(item?.NameEn??"")">
+                            <a href="#" type="button" class="btn btn-circle @iClass" title="@item.NameFa" id="A-@(loopCounter++)">@(loopCounter)</a>
+                            <p>@item.NameFa</p>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+
+    </section>
+</div>
+
+

@@ -1,0 +1,286 @@
+﻿@model  Pardis.Product.BLL.ViewModel.ProductListRelatedList
+
+@{
+    ViewBag.Title = "افزودن کالا به پرونده";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    int SalsFoldeId = ViewBag?.SalsFoldeId ?? 0;
+    var list = Model?.VitualProductListRelated;
+}
+
+@section HeadersCustom
+{
+    <link rel="stylesheet" href="~/Content/plugins/datatables/dataTables.bootstrap4.css">
+}
+
+<div class="container-fluid">
+
+    @{Html.RenderAction("ShowWorFlowByContentId", "WorkFlow", new { area = "Public", contentId = SalsFoldeId });}
+
+    <!-- Main row -->
+    <div class="row">
+        <!-- Left col -->
+        <section class="col-lg col-12">
+            <div class="row title-custom ">
+                <h2>
+                    @ViewBag.Title
+                </h2>
+            </div>
+            <div class="card card-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        @{Html.RenderAction(MVC.SalesManagement.SalesFolder.ActionNames.DetailOnTopPage, MVC.SalesManagement.SalesFolder.Name, new { area = MVC.SalesManagement.Name, folderId = SalsFoldeId });}
+                    </div>
+                </div>
+
+                @using (Html.BeginForm(MVC.SalesManagement.ProductRelated.AddOrUpdate(), FormMethod.Post, new { @class = "login100-form validate-form", @Id = "ProductRelatedForm" }))
+                {
+
+                    <div class="row">
+                        <section class="col-md-11" style="margin-right:55px; margin-top:10px; margin-bottom:10px;">
+
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.ProductListRelated.ProductId)
+                                        @Html.ValidationMessageFor(model => model.ProductListRelated.ProductId, "*", new { @class = "text-danger" })
+                                        @Html.DropDownListFor(model => model.ProductListRelated.ProductId, new List<SelectListItem>() { }, "-",
+                             new Dictionary<string, Object>
+                             {
+                                                { "id", "ProductId" },
+                                                { "name", "ProductId" },
+                                                { "class","form-control input-style select-box-style width-select-style select2" },
+                                                {"data-search","true"}
+                             })
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.ProductListRelated.MeasurementUnitId)
+                                        @Html.ValidationMessageFor(model => model.ProductListRelated.MeasurementUnitId, "*", new { @class = "text-danger" })
+                                        @Html.DropDownListFor(model => model.ProductListRelated.MeasurementUnitId, new List<SelectListItem>() { }, "-",
+                             new Dictionary<string, Object>
+                             {
+                                                { "id", "MeasurementUnitId" },
+                                                { "name", "MeasurementUnitId" },
+                                                { "class","form-control select2" },
+                                                {"data-search","true"}
+                             })
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.ProductListRelated.Amount)
+                                        @Html.ValidationMessageFor(model => model.ProductListRelated.Amount, "*", new { @class = "text-danger" })
+                                        @Html.TextBoxFor(model => model.ProductListRelated.Amount, new { @class = "form-control", @Id = "Amount", @type = "Number", @min = 1 })
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-12">
+                                    <button type="button" class="btn btn-success float-left" id="PlusBtn">
+                                        <i class="fa fa-plus" aria-hidden="true"></i>
+                                        افزودن
+                                    </button>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                }
+                <div>
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                        <table id="ProductTable" class="table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        عنوان محصول
+                                    </th>
+                                    <th>
+                                        واحد اندازه گیری
+                                    </th>
+                                    <th>
+                                        مقدار
+                                    </th>
+                                    <th>
+                                        عملیات
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (list != null)
+                                {
+                                    int i = 0;
+                                    foreach (var item in list)
+                                    {
+                                        <tr>
+                                            <td id="@item.ProductId">@(item?.ProductFa)</td>
+                                            <td id="@item.MeasurementUnitId">@(item?.MeasurementUnitFa)</td>
+                                            <td>@(item?.Amount)</td>
+                                            <td><button type="button" class="btn redBtn" onClick="deleteRow(@(i++))"><i class="fa fa-trash" aria-hidden="true"></i></button></td>
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                        <div class="tableNoContent">
+                            <span>
+                                موردی ثبت نشده است
+                            </span>
+                        </div>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Description)
+                            @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                            <div class="mb-3">
+                                @Html.TextAreaFor(model => model.Description, new
+                                {
+                                    @id = "editor1",
+                                    @name = "editor1",
+                                    @style = "width: 100%"
+                                })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12">
+                        <button type="button" id="submitBtn" class="btn btn-success float-left">
+                            تاييد
+                        </button>
+                        <a href="@Url.Action(MVC.SalesManagement.SalesFolder.Index())" type="button" class="btn btn-primary float-left ml-2" style="margin-right: 5px;">
+                            بازگشت
+                        </a>
+                    </div>
+                </div>
+                
+
+            </div>
+        </section>
+    </div>
+    <!-- /.row (main row) -->
+</div><!-- /.container-fluid -->
+
+@section Scripts
+{
+    <script src="~/Content/plugins/datatables/jquery.dataTables.js"></script>
+    <script src="~/Content/plugins/datatables/dataTables.bootstrap4.js"></script>
+    <script>
+        //init value
+        ProductReletedList = [];
+
+        //init public function
+        var updateList = function () {
+            stringList = "";
+
+            ProductReletedList.forEach(function (value, index) {
+                console.log(value);
+                stringList += `<tr>
+                                        <td id="${value['ProductId']}">${value['ProductFa']}</td>
+                                        <td id="${value['MeasurementUnitId']}">${value['MeasurementUnitFa']}</td>
+                                        <td>${value['Amount']}</td>
+                                        <td><button type="button" class="btn redBtn" onClick="deleteRow(${index})"><i class="fa fa-trash" aria-hidden="true"></i></button></td>
+                                    </tr>`;
+            });
+
+            $("#ProductTable > tbody").html(stringList);
+
+            if (ProductReletedList.length > 0)
+                $('div.tableNoContent').fadeOut();
+            else
+                $('div.tableNoContent').fadeIn();
+
+        }
+
+        var deleteRow = function (index) {
+
+            ProductReletedList.splice(parseInt(index), 1);
+
+            updateList();
+        }
+
+        $(function () {
+
+            FillItemsByTypeNameEn("ProductMeasurementUnit", "#MeasurementUnitId", '');
+
+            FillSearchingDropDownList("@Url.Action(MVC.Public.Product.FillProductSearching())", "#ProductId", '');
+
+            //init event
+            $('#submitBtn').on('click', function () {
+                var url = '/Pardis/SalesManagement/ProductRelated/AddOrUpdate/';
+
+                //check model
+                if (ProductReletedList.length < 1) {
+                    modalAlert('عملیات', 'فرم به درستی تکمیل نشده است.');
+                    return;
+                }
+
+
+                var finallyModel = { "Description": $("#editor1").text(), "VitualProductListRelated": ProductReletedList, "SaleFolderId": '@SalsFoldeId' }
+
+
+                AjaxModelSubmit(JSON.stringify(finallyModel).toString(), url, function (response) {
+                    
+                    if (response > 0) {
+                        //location = "@Url.Action(MVC.SalesManagement.SalesFolder.ActionNames.Index,MVC.SalesManagement.SalesFolder.Name, new { @area = MVC.SalesManagement.Name, @Id = SalsFoldeId })";
+                        location = "@Url.Action(MVC.SalesManagement.SalesFolder.Index(SalsFoldeId))";
+                    }
+                }, false);
+
+            });
+
+            //insert Btn
+            $('#PlusBtn').on("click", function () {
+
+                var flag = 0;
+
+                if (!($('#ProductId').val() > 1 && $('#MeasurementUnitId').val() > 1 && $('#Amount').val() > 0)) {
+
+                    modalAlert("عملیات", "موارد به درستی تکمیل نشده اند.");
+
+                    return;
+                }
+
+                ProductReletedList.forEach(function (value, index) {
+
+                    if (value["ProductId"] == $('#ProductId').val()) {
+                        modalAlert("عملیات", "کالا به درستی انتخاب نشده است.");
+
+                        flag++;
+                        return;
+                    }
+
+                });
+
+                if (flag > 0)
+                    return;
+
+                ProductReletedList.push({
+                    'ProductId': $('#ProductId').val(),
+                    'ProductFa': $('#select2-ProductId-container').text(),
+                    'MeasurementUnitId': $('#MeasurementUnitId').val(),
+                    'MeasurementUnitFa': $('#select2-MeasurementUnitId-container').text(),
+                    'Amount': $('#Amount').val()
+                });
+
+                updateList();
+
+                $('#ProductRelatedForm')[0].reset();
+
+                $('#ProductId').val('0').trigger('change');
+
+                $('#MeasurementUnitId').val('0').trigger('change');
+            });
+
+
+        });
+
+
+    </script>
+}

@@ -1,0 +1,115 @@
+﻿<!-- Main Sidebar Container -->
+<aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <!-- Brand Logo -->
+    <a href="#" class="brand-link">
+        <img src="~/Content/img/logo2.png" alt="Logo" class="brand-image"
+             style="margin-left: 5px;">
+        <span class="brand-text font-weight-light">سامانه پردیس</span>
+    </a>
+
+    <!-- Sidebar -->
+    <div class="sidebar" style="direction: ltr">
+        <div style="direction: rtl">
+            <!-- Sidebar user panel (optional) -->
+            <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+                <div class="image">
+                    <img src="~/Content/img/faces/@(Pardis.Product.BLL.ViewModel.SSO.CurrentAccount.Person.ImageName)"
+                         class="img-circle elevation-2" width="200" height="200" alt="User Image">
+                </div>
+                <div class="info">
+                    <a href="#" class="d-block">
+                        @(
+                                Pardis.Product.BLL.ViewModel.SSO.CurrentAccount.Person.Fname
+                                + " " +
+                                Pardis.Product.BLL.ViewModel.SSO.CurrentAccount.Person.Lname
+                        )
+                    </a>
+                    <a href="#" class="d-sm-block text-muted">
+
+                        @(Pardis.PublicFunction.Functions.ToPersianName(Pardis.Product.BLL.ViewModel.SSO.CurrentAccount.Roles.FirstOrDefault()))
+
+                    </a>
+                </div>
+            </div>
+            <!-- Sidebar Menu -->
+            <nav class="mt-2">
+                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                    <!-- Add icons to the links using the .nav-icon class
+                         with font-awesome or any other icon font library -->
+                    <!--Cart Dashboard-->
+                    <li class="nav-item">
+                        <a href="@Url.Action(MVC.Home.Index())" class="nav-link  @(Pardis.PublicFunction.Tools.HttpTools.PathRequestComparetor(ViewContext,"Index",MVC.Home.Name) ? "active" : "")">
+                            <i class="nav-icon fa fa-inbox"></i>
+                            <p>
+                                کارتابل
+                                <!--span class="right badge badge-danger">جدید</span-->
+                            </p>
+                        </a>
+                    </li>
+
+                    <!--SaleAndSupplyManagment-->
+                    <li class="nav-item has-treeview @(Pardis.PublicFunction.Tools.HttpTools.PathRequestComparetor(ViewContext,null,MVC.SalesManagement.SalesFolder.Name,MVC.SalesManagement.Name) ? "menu-open" : "") ">
+                        <a href="#" class="nav-link @(Pardis.PublicFunction.Tools.HttpTools.PathRequestComparetor(ViewContext,null,MVC.SalesManagement.SalesFolder.Name,MVC.SalesManagement.Name) ? "active" : "")">
+                            <i class="nav-icon fa fa-briefcase"></i>
+                            <p>
+                                مدیریت فروش و تامین
+                                <i class="right fa fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="@Url.Action(MVC.SalesManagement.SalesFolder.AddOrUpdate())" class="nav-link @(Pardis.PublicFunction.Tools.HttpTools.PathRequestComparetor(ViewContext,"addorupdate",MVC.SalesManagement.SalesFolder.Name,MVC.SalesManagement.Name) ? "active" : "")">
+                                    <i class="fa fa-circle-o nav-icon"></i>
+                                    <p>ثبت درخواست تامین</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="@Url.Action(MVC.SalesManagement.SalesFolder.Index())" class="nav-link @(Pardis.PublicFunction.Tools.HttpTools.PathRequestComparetor(ViewContext,"index",MVC.SalesManagement.SalesFolder.Name,MVC.SalesManagement.Name) ? "active" : "")">
+                                    <i class="fa fa-circle-o nav-icon"></i>
+                                    <p>مشاهده همه درخواست ها</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+
+                    <!--Report Dashboard-->
+                    <li class="nav-item">
+                        <a href="@Url.Action(MVC.Dashboard.Diagram.Index())" class="nav-link">
+                            <i class="nav-icon fa fa-pie-chart"></i>
+                            <p>
+                                گزارشات
+                                <!--span class="right badge badge-danger">جدید</span-->
+                            </p>
+                        </a>
+                    </li>
+
+                    <!--Manager-->
+                    <li class="nav-item">
+                        <a href="@Url.Action(MVC.Admin.HomeAdminis.Index())" class="nav-link">
+                            <i class="nav-icon fa fa-cogs"></i>
+                            <p>
+                                مدیریت سامانه
+                                <!--span class="right badge badge-danger">جدید</span-->
+                            </p>
+                        </a>
+                    </li>
+
+                    <!--Manager-->
+                    <li class="nav-item">
+                        <a href="@Url.Action(MVC.Helper.Index())" class="nav-link">
+                            <i class="nav-icon fa fa-info"></i>
+                            <p>
+                                راهنما
+                                <!--span class="right badge badge-danger">جدید</span-->
+                            </p>
+                        </a>
+                    </li>
+
+                </ul>
+            </nav>
+            <!-- /.sidebar-menu -->
+        </div>
+    </div>
+    <!-- /.sidebar -->
+</aside>

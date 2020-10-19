@@ -1,0 +1,279 @@
+﻿
+@{
+    ViewBag.Title = "پروندهای فروش/تامین";
+    ViewBag.GridName = "لیست فروش/تامین";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var Id = TempData["FolderId"]?.ToString() ?? "0";
+    var curentUser = Pardis.Product.BLL.ViewModel.SSO.CurrentAccount;
+}
+
+@section HeadersCustom
+{
+    <style>
+        dd {
+            width: calc(52% - 130px) !important;
+        }
+    </style>
+}
+
+<div class="container-fluid">
+    <!-- Main row -->
+    <div class="row">
+        <!-- Left col -->
+        <section class="col-lg col-12">
+            <div class="row title-custom ">
+                <h2>
+                    @ViewBag.Title
+                </h2>
+            </div>
+            <div class="card card-body">
+
+                <div class="col-md-12">
+                    <div class="btn btn-default pull-right">
+                        <a class="add_doc" href="@Url.Action(MVC.SalesManagement.SalesFolder.AddOrUpdate())" style="color: #007512;">ثبت درخواست جدید</a><a href="@Url.Action(MVC.SalesManagement.SalesFolder.AddOrUpdate())" class="link add_doc">
+                            <span class="fa fa-plus-circle" aria-hidden="true" style="position: relative;text-align: center;vertical-align: middle;color: green;margin: auto;"></span>
+                        </a>
+                    </div>
+                </div>
+
+                <div style="margin-bottom:20px;margin-top: 20px;">
+                    <div class="divider divider-nine m-t-20" data-toggle="collapse" data-target="#filterDiv">
+                        <button class="btn btn-sm btn-default" style="background-color: #e0e6eb;color: #616c76;"><i class="fa fa-filter"></i> فیلترها</button>
+                    </div>
+
+                    <div class="row p-r-10 p-l-10 collapse" id="filterDiv">
+                        <div class="col-md-12 p-b-0 well">
+
+                            <div class="row m-b-5">
+                                <div class="col-md-4">
+                                    <label class="wid-rtl">عنوان</label>
+                                    <input type="text" name="AL_Number" id="AL_Number" class="form-control input-style pg-input-width" />
+                                </div>
+
+                                <div class="col-md-4">
+                                    <label class="wid-rtl">نیاز سنجی</label>
+                                    <input type="text" name="AL_Subject" id="AL_Subject" class="form-control input-style pg-input-width" />
+                                </div>
+
+                                <div class="col-md-4 text-left">
+                                    <button class="btn btn-sm btn-info m-l-30" id="filterBtn_AL"><i class="fa fa-search"></i><span>جستجو</span></button>
+                                </div>
+                            </div>
+
+                            <div class="row  m-b-5">
+                                <div class="col-md-4 ">
+                                    <label class="wid-rtl">وضعیت</label>
+                                    <select class="form-control input-style select-box-style width-select-style" name="AL_Status" id="AL_Status" data-search="true">
+                                        <option value="">همه</option>
+                                        <option value="NotSeen">مشاهده نشده</option>
+                                        <option value="Seen">مشاهده شده</option>
+                                        <option value="Attached">اقدام شده</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-md-4 m-b-10">
+                                    <label class="wid-rtl">تاریخ ثبت</label>
+                                    <input type="text" name="AL_Date" id="AL_Date" class="form-control input-style pg-input-width PersianDate EmptyValue" />
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+
+                <table id="jqGrid"></table>
+                <div id="jqControls"></div>
+            </div>
+        </section>
+    </div>
+
+    <div class="panel" id="PanelContentDetailsSalesFolder">
+
+    </div>
+    <!-- /.row (main row) -->
+</div><!-- /.container-fluid -->
+
+
+@section scripts
+{
+    <script>
+        $(function () {
+            $("#jqGrid").jqGrid({
+                url: "@Url.Action(MVC.SalesManagement.SalesFolder.ShowGrid())",
+                datatype: 'json',
+                mtype: 'POST',
+                colNames: ['کد یکتا', 'عنوان درخواست', 'وضعیت پرونده', 'نیاز سنجی', 'مهلت اعلام قیمت', 'مهلت تحویل', 'نوع درخواست', 'عملیات'],
+                colModel: [
+                    {
+                        key: true,
+                        hidden: true,
+                        name: 'Id',
+                        index: 'Id',
+                        width: 50
+                    },
+                    {
+                        key: false,
+                        name: 'Subject',
+                        index: 'Subject',
+                        align: "center",
+                        sorttype: "string",
+                        width: 200
+                    },
+                    {
+                        key: false,
+                        name: 'ProcessStepFa',
+                        index: 'ProcessStepFa',
+                        align: "center",
+                        sorttype: "string",
+                        width: 100
+                    },
+                    {
+                        key: false,
+                        name: 'NeedFa',
+                        index: 'NeedFa',
+                        align: "center",
+                        sorttype: "string",
+                        width: 100
+                    },
+                    {
+                        key: false,
+                        name: 'PriceAnnouncementDeadlineFa',
+                        index: 'PriceAnnouncementDeadlineFa',
+                        align: "center",
+                        sorttype: "string",
+                        width: 200
+
+                    },
+                    {
+                        key: false,
+                        name: 'DeliveryDeadlineFa',
+                        index: 'DeliveryDeadlineFa',
+                        align: "center",
+                        sorttype: "string",
+                        width: 200
+
+                    },
+                    {
+                        key: false,
+                        name: 'RequestTypeFa',
+                        index: 'RequestTypeFa',
+                        align: "center",
+                        sorttype: "string",
+                        width: 150
+
+                    },
+                    {
+                        key: false,
+                        name: 'Actions',
+                        index: 'Actions',
+                        formatter: displayButtons,
+                        search: false,
+                        align: "center",
+                        width: 300
+                    },
+                ],
+                pager: jQuery('#jqControls'),
+                rowNum: 10,
+                rowList: [10, 20, 30, 40, 50],
+                height: '100%',
+                width: '100%',
+                sortorder: 'desc',
+                viewrecords: true,
+                shrinkToFit: true,
+                caption: '@ViewBag.GridName',
+                direction: "rtl", // instructs the grid to use RTL settings
+                emptyrecords: 'رکوردی برای نمایش وجود ندارد',
+                jsonReader: {
+                    root: "rows",
+                    page: "page",
+                    total: "total",
+                    records: "records",
+                    repeatitems: false,
+                    sortable: true,
+                    Id: "@Id"
+                },
+                autowidth: true,
+                multiselect: false,
+                onSelectRow: function (id) {
+                    //Onclick
+                    //GetDetailById(id);
+                },
+                loadComplete: function () {
+                    ConvertNumberToPersion();
+                },
+                loadError: function (xhr, st, err) {
+                    jQuery("#jqControls")
+                        .html("Type: " + st + "; Response: " + xhr.status + " " + xhr.statusText);
+                },
+            }).navGrid('#jqControls', { search: false, refresh: true, edit: false, add: false, del: false })
+            .jqGrid('filterToolbar',
+                {
+                    stringResult: true,
+                    searchOnEnter: false,
+                    autosearch: true,
+                    searchOperators: true,
+                    groupOp: 'AND',
+                    defaultSearch: 'cn'
+                })
+            .jqGrid('navButtonAdd',
+                '#jqControls',
+                {
+                    caption: "",
+                    title: "تنظیم نمایش ستون ها",
+                    onClickButton: function () {
+                        jQuery("#jqGrid").jqGrid('columnChooser',
+                            {
+                                done: function (perm) {
+                                    //SetGridCookie("jqGrid", "jq_Grid", perm);
+                                    console.log(perm);
+                                }
+                            });
+                    }
+                })
+            .jqGrid('navButtonAdd', '#jqControls',
+                {
+                    caption: "",
+                    title: "فیلترهای جستجو",
+                    buttonicon: 'ui-icon-search',
+                    onClickButton: function () {
+                        this.toggleToolbar();
+                    }
+                }
+            )
+
+        });
+
+        function displayButtons(cellvalue, options, rowObject) {
+            var ShowBtn = "<button  class='btn-sm btn-warning' type='button' onclick='GetDetailById(" + rowObject.Id +")'><i class='fa fa-info-circle'></i><span style='margin-right: 5px;'>نمایش</span></button >";
+            if  ('@curentUser.Roles.Contains(Pardis.Enums.Role.Admin)' == 'True' ||
+                 '@curentUser.Roles.Contains(Pardis.Enums.Role.SupplyManager)' == 'True' ||
+                 '@curentUser.Roles.Contains(Pardis.Enums.Role.SupplyExpert)' == 'True' )
+            {
+                ShowBtn += "<button  class='actionFolder btn-sm btn-success' style='margin-right: 5px;' type='button' onclick='GetPartialById(" + rowObject.Id +")'><i class='fa fa-check' aria-hidden='true'></i><span style='margin-right: 5px;'>اقدام</span></button >";
+            }
+
+            ShowBtn += "<button style='margin-right: 5px;'  class='btn-sm btn' type='button'><i class='fa fa-bookmark'></i></button >";
+            return ShowBtn;
+        };
+
+        function GetDetailById(id) {
+            DetailsShowData(id, '@Url.Action(MVC.SalesManagement.SalesFolder.Detail())', '#SystemMessageText');
+
+        }
+
+        function GetPartialById(id) {
+            var url = '@Url.Action(MVC.Public.WorkFlow.RouteAction(123))'.replace("123", id);
+            location = url;
+        }
+
+
+        $(document).ready(function () {
+
+            if (parseInt('@Id') > 0) {
+                setTimeout(() => { DetailsShowData('@Id', '@Url.Action(MVC.SalesManagement.SalesFolder.Detail())', '#SystemMessageText'); }, 500);
+            }
+
+        });
+    </script>
+}

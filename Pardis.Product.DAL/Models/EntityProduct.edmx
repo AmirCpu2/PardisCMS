@@ -1,0 +1,1368 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="PardisDemoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Content">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ContentType" Type="int" Nullable="false" />
+          <Property Name="CreatorId" Type="int" />
+          <Property Name="RegisterDate" Type="datetime" Nullable="false" />
+          <Property Name="IsDelete" Type="bit" />
+          <Property Name="IsArchive" Type="bit" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="StateKindeGroup" Type="int" />
+          <Property Name="StateKinde" Type="int" />
+        </EntityType>
+        <EntityType Name="File">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="500" />
+          <Property Name="Type" Type="nvarchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="Item">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NameEn" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="NameFa" Type="nvarchar" MaxLength="150" />
+          <Property Name="ItemTypeId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ItemCollection">
+          <Key>
+            <PropertyRef Name="ItemId" />
+            <PropertyRef Name="ContentId" />
+          </Key>
+          <Property Name="ItemId" Type="int" Nullable="false" />
+          <Property Name="ContentId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ItemType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NameEn" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="NameFa" Type="nvarchar" MaxLength="150" />
+          <Property Name="FlagCustom" Type="bit" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="CallForPrice">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="SalesFolderId" Type="int" />
+          <Property Name="ProductId" Type="int" />
+          <Property Name="ShippingPrice" Type="varchar" MaxLength="500" />
+          <Property Name="SupplierProfileId" Type="int" />
+          <Property Name="DeliveryTime" Type="datetime" />
+          <Property Name="SupplyTypeId" Type="int" />
+          <Property Name="UnitPrice" Type="varchar" MaxLength="500" />
+          <Property Name="PriceTypeId" Type="int" />
+          <Property Name="Count" Type="int" />
+          <Property Name="StatusProductId" Type="int" />
+          <Property Name="ShippingPriceTypeId" Type="int" />
+          <Property Name="ExpiryDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Need">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="title" Type="nvarchar(max)" />
+          <Property Name="factorneed" Type="bit" />
+          <Property Name="factordate" Type="datetime" />
+          <Property Name="factorip" Type="nvarchar" MaxLength="50" />
+          <Property Name="factorby" Type="nvarchar" MaxLength="50" />
+          <Property Name="profileid" Type="int" Nullable="false" />
+          <Property Name="catid" Type="int" Nullable="false" />
+          <Property Name="subcatid" Type="nvarchar" MaxLength="50" />
+          <Property Name="sectorid" Type="int" />
+          <Property Name="description" Type="nvarchar(max)" />
+          <Property Name="status" Type="nvarchar(max)" />
+          <Property Name="confirmby" Type="nvarchar" MaxLength="50" />
+          <Property Name="confirmip" Type="nvarchar" MaxLength="50" />
+          <Property Name="confirmdate" Type="datetime" />
+          <Property Name="progress" Type="int" />
+          <Property Name="iscampaign" Type="bit" />
+          <Property Name="nexttime" Type="int" />
+          <Property Name="nextdates" Type="int" />
+          <Property Name="laststatusdesc" Type="nvarchar(max)" />
+          <Property Name="laststatusdescdates" Type="datetime" />
+          <Property Name="laststatusdescby" Type="nvarchar" MaxLength="50" />
+          <Property Name="toclnd" Type="datetime" />
+          <Property Name="price" Type="float" />
+          <Property Name="csproviderid" Type="int" />
+          <Property Name="editedby" Type="nvarchar" MaxLength="50" />
+          <Property Name="editedip" Type="nvarchar" MaxLength="50" />
+          <Property Name="editeddate" Type="datetime" />
+          <Property Name="userid" Type="int" />
+          <Property Name="assignby" Type="nvarchar(max)" />
+          <Property Name="assigndate" Type="datetime" />
+          <Property Name="departmentid" Type="int" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="500" />
+          <Property Name="BrandId" Type="int" />
+          <Property Name="Title" Type="nvarchar" MaxLength="250" />
+          <Property Name="CategoryId" Type="int" />
+        </EntityType>
+        <EntityType Name="ProductListRelated">
+          <Key>
+            <PropertyRef Name="ProductId" />
+            <PropertyRef Name="SalesFolderId" />
+          </Key>
+          <Property Name="ProductId" Type="int" Nullable="false" />
+          <Property Name="SalesFolderId" Type="int" Nullable="false" />
+          <Property Name="MeasurementUnitId" Type="int" />
+          <Property Name="Amount" Type="int" />
+        </EntityType>
+        <EntityType Name="SalesFolder">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="NeedId" Type="int" />
+          <Property Name="Subject" Type="nvarchar" MaxLength="250" />
+          <Property Name="PriceAnnouncementDeadline" Type="date" />
+          <Property Name="DeliveryDeadline" Type="date" />
+          <Property Name="RequestTypeId" Type="int" />
+          <Property Name="WarrantyTerms" Type="nvarchar(max)" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="ProfileId" Type="int" />
+          <Property Name="ProcessStepId" Type="int" />
+          <Property Name="DescriptionLom" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Account">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProfileId" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="RoleId" Type="int" />
+        </EntityType>
+        <EntityType Name="Profile">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="isperson" Type="int" />
+          <Property Name="birthdate" Type="int" />
+          <Property Name="birthplace" Type="nvarchar" MaxLength="250" />
+          <Property Name="registerdate" Type="datetime" />
+          <Property Name="fathername" Type="nvarchar" MaxLength="250" />
+          <Property Name="name" Type="nvarchar(max)" />
+          <Property Name="uniquename" Type="nvarchar(max)" />
+          <Property Name="repname" Type="nvarchar(max)" />
+          <Property Name="password" Type="nvarchar" MaxLength="50" />
+          <Property Name="code" Type="nvarchar" MaxLength="250" />
+          <Property Name="manager" Type="nvarchar" MaxLength="250" />
+          <Property Name="idnumber" Type="nvarchar" MaxLength="250" />
+          <Property Name="place" Type="nvarchar" MaxLength="250" />
+          <Property Name="edulevel" Type="int" />
+          <Property Name="edufield" Type="nvarchar" MaxLength="250" />
+          <Property Name="job" Type="nvarchar" MaxLength="250" />
+          <Property Name="country" Type="nvarchar" MaxLength="50" />
+          <Property Name="postalcode" Type="nvarchar" MaxLength="50" />
+          <Property Name="tel" Type="nvarchar(max)" />
+          <Property Name="address" Type="nvarchar(max)" />
+          <Property Name="comment" Type="nvarchar(max)" />
+          <Property Name="howyouknowid" Type="int" />
+          <Property Name="usergroup" Type="int" />
+          <Property Name="isProvider" Type="int" />
+          <Property Name="acccotactconfirm" Type="bit" />
+          <Property Name="iscampaign" Type="bit" />
+        </EntityType>
+        <Association Name="FK_Account_Profile">
+          <End Role="Profile" Type="Self.Profile" Multiplicity="1" />
+          <End Role="Account" Type="Self.Account" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Profile">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Account">
+              <PropertyRef Name="ProfileId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CallForPrice_CallForPrice_ShippingPriceType">
+          <End Role="Item" Type="Self.Item" Multiplicity="0..1" />
+          <End Role="CallForPrice" Type="Self.CallForPrice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Item">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CallForPrice">
+              <PropertyRef Name="ShippingPriceTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CallForPrice_Content">
+          <End Role="Content" Type="Self.Content" Multiplicity="1" />
+          <End Role="CallForPrice" Type="Self.CallForPrice" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Content">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CallForPrice">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CallForPrice_ItemType_PriceType">
+          <End Role="Item" Type="Self.Item" Multiplicity="0..1" />
+          <End Role="CallForPrice" Type="Self.CallForPrice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Item">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CallForPrice">
+              <PropertyRef Name="PriceTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CallForPrice_ItemType_StatusProduct">
+          <End Role="Item" Type="Self.Item" Multiplicity="0..1" />
+          <End Role="CallForPrice" Type="Self.CallForPrice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Item">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CallForPrice">
+              <PropertyRef Name="StatusProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CallForPrice_ItemType_SupplyType">
+          <End Role="Item" Type="Self.Item" Multiplicity="0..1" />
+          <End Role="CallForPrice" Type="Self.CallForPrice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Item">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CallForPrice">
+              <PropertyRef Name="SupplyTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CallForPrice_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="CallForPrice" Type="Self.CallForPrice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CallForPrice">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CallForPrice_Profile_supplierProfile">
+          <End Role="Profile" Type="Self.Profile" Multiplicity="0..1" />
+          <End Role="CallForPrice" Type="Self.CallForPrice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Profile">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CallForPrice">
+              <PropertyRef Name="SupplierProfileId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CallForPrice_SalesFolder">
+          <End Role="SalesFolder" Type="Self.SalesFolder" Multiplicity="0..1" />
+          <End Role="CallForPrice" Type="Self.CallForPrice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SalesFolder">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CallForPrice">
+              <PropertyRef Name="SalesFolderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_File_Content">
+          <End Role="Content" Type="Self.Content" Multiplicity="1" />
+          <End Role="File" Type="Self.File" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Content">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="File">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Item_ItemType">
+          <End Role="ItemType" Type="Self.ItemType" Multiplicity="1" />
+          <End Role="Item" Type="Self.Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ItemType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Item">
+              <PropertyRef Name="ItemTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ItemCollection_Content">
+          <End Role="Content" Type="Self.Content" Multiplicity="1" />
+          <End Role="ItemCollection" Type="Self.ItemCollection" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Content">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ItemCollection">
+              <PropertyRef Name="ContentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ItemCollection_Item">
+          <End Role="Item" Type="Self.Item" Multiplicity="1" />
+          <End Role="ItemCollection" Type="Self.ItemCollection" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Item">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ItemCollection">
+              <PropertyRef Name="ItemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Need_Content">
+          <End Role="Content" Type="Self.Content" Multiplicity="1" />
+          <End Role="Need" Type="Self.Need" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Content">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Need">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Needs_profile">
+          <End Role="Profile" Type="Self.Profile" Multiplicity="1" />
+          <End Role="Need" Type="Self.Need" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Profile">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Need">
+              <PropertyRef Name="profileid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product_Content">
+          <End Role="Content" Type="Self.Content" Multiplicity="1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Content">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product_ItemType">
+          <End Role="ItemType" Type="Self.ItemType" Multiplicity="0..1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ItemType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="BrandId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductListRelated_Item">
+          <End Role="Item" Type="Self.Item" Multiplicity="0..1" />
+          <End Role="ProductListRelated" Type="Self.ProductListRelated" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Item">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProductListRelated">
+              <PropertyRef Name="MeasurementUnitId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductListRelated_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="ProductListRelated" Type="Self.ProductListRelated" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProductListRelated">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductListRelated_SalesFolder">
+          <End Role="SalesFolder" Type="Self.SalesFolder" Multiplicity="1" />
+          <End Role="ProductListRelated" Type="Self.ProductListRelated" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SalesFolder">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProductListRelated">
+              <PropertyRef Name="SalesFolderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SalesFolder_Content">
+          <End Role="Content" Type="Self.Content" Multiplicity="1" />
+          <End Role="SalesFolder" Type="Self.SalesFolder" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Content">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SalesFolder">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SalesFolder_ItemType">
+          <End Role="Item" Type="Self.Item" Multiplicity="0..1" />
+          <End Role="SalesFolder" Type="Self.SalesFolder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Item">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SalesFolder">
+              <PropertyRef Name="RequestTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PardisDemoModelStoreContainer">
+          <EntitySet Name="Content" EntityType="Self.Content" Schema="Base" store:Type="Tables" />
+          <EntitySet Name="File" EntityType="Self.File" Schema="Base" store:Type="Tables" />
+          <EntitySet Name="Item" EntityType="Self.Item" Schema="Base" store:Type="Tables" />
+          <EntitySet Name="ItemCollection" EntityType="Self.ItemCollection" Schema="Base" store:Type="Tables" />
+          <EntitySet Name="ItemType" EntityType="Self.ItemType" Schema="Base" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CallForPrice" EntityType="Self.CallForPrice" Schema="Product" store:Type="Tables" />
+          <EntitySet Name="Need" EntityType="Self.Need" Schema="Product" store:Type="Tables" />
+          <EntitySet Name="Product" EntityType="Self.Product" Schema="Product" store:Type="Tables" />
+          <EntitySet Name="ProductListRelated" EntityType="Self.ProductListRelated" Schema="Product" store:Type="Tables" />
+          <EntitySet Name="SalesFolder" EntityType="Self.SalesFolder" Schema="Product" store:Type="Tables" />
+          <EntitySet Name="Account" EntityType="Self.Account" Schema="SSO" store:Type="Tables" />
+          <EntitySet Name="Profile" EntityType="Self.Profile" Schema="SSO" store:Type="Tables" />
+          <AssociationSet Name="FK_Account_Profile" Association="Self.FK_Account_Profile">
+            <End Role="Profile" EntitySet="Profile" />
+            <End Role="Account" EntitySet="Account" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CallForPrice_CallForPrice_ShippingPriceType" Association="Self.FK_CallForPrice_CallForPrice_ShippingPriceType">
+            <End Role="Item" EntitySet="Item" />
+            <End Role="CallForPrice" EntitySet="CallForPrice" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CallForPrice_Content" Association="Self.FK_CallForPrice_Content">
+            <End Role="Content" EntitySet="Content" />
+            <End Role="CallForPrice" EntitySet="CallForPrice" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CallForPrice_ItemType_PriceType" Association="Self.FK_CallForPrice_ItemType_PriceType">
+            <End Role="Item" EntitySet="Item" />
+            <End Role="CallForPrice" EntitySet="CallForPrice" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CallForPrice_ItemType_StatusProduct" Association="Self.FK_CallForPrice_ItemType_StatusProduct">
+            <End Role="Item" EntitySet="Item" />
+            <End Role="CallForPrice" EntitySet="CallForPrice" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CallForPrice_ItemType_SupplyType" Association="Self.FK_CallForPrice_ItemType_SupplyType">
+            <End Role="Item" EntitySet="Item" />
+            <End Role="CallForPrice" EntitySet="CallForPrice" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CallForPrice_Product" Association="Self.FK_CallForPrice_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="CallForPrice" EntitySet="CallForPrice" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CallForPrice_Profile_supplierProfile" Association="Self.FK_CallForPrice_Profile_supplierProfile">
+            <End Role="Profile" EntitySet="Profile" />
+            <End Role="CallForPrice" EntitySet="CallForPrice" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CallForPrice_SalesFolder" Association="Self.FK_CallForPrice_SalesFolder">
+            <End Role="SalesFolder" EntitySet="SalesFolder" />
+            <End Role="CallForPrice" EntitySet="CallForPrice" />
+          </AssociationSet>
+          <AssociationSet Name="FK_File_Content" Association="Self.FK_File_Content">
+            <End Role="Content" EntitySet="Content" />
+            <End Role="File" EntitySet="File" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Item_ItemType" Association="Self.FK_Item_ItemType">
+            <End Role="ItemType" EntitySet="ItemType" />
+            <End Role="Item" EntitySet="Item" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ItemCollection_Content" Association="Self.FK_ItemCollection_Content">
+            <End Role="Content" EntitySet="Content" />
+            <End Role="ItemCollection" EntitySet="ItemCollection" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ItemCollection_Item" Association="Self.FK_ItemCollection_Item">
+            <End Role="Item" EntitySet="Item" />
+            <End Role="ItemCollection" EntitySet="ItemCollection" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Need_Content" Association="Self.FK_Need_Content">
+            <End Role="Content" EntitySet="Content" />
+            <End Role="Need" EntitySet="Need" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Needs_profile" Association="Self.FK_Needs_profile">
+            <End Role="Profile" EntitySet="Profile" />
+            <End Role="Need" EntitySet="Need" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_Content" Association="Self.FK_Product_Content">
+            <End Role="Content" EntitySet="Content" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_ItemType" Association="Self.FK_Product_ItemType">
+            <End Role="ItemType" EntitySet="ItemType" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductListRelated_Item" Association="Self.FK_ProductListRelated_Item">
+            <End Role="Item" EntitySet="Item" />
+            <End Role="ProductListRelated" EntitySet="ProductListRelated" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductListRelated_Product" Association="Self.FK_ProductListRelated_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="ProductListRelated" EntitySet="ProductListRelated" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductListRelated_SalesFolder" Association="Self.FK_ProductListRelated_SalesFolder">
+            <End Role="SalesFolder" EntitySet="SalesFolder" />
+            <End Role="ProductListRelated" EntitySet="ProductListRelated" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SalesFolder_Content" Association="Self.FK_SalesFolder_Content">
+            <End Role="Content" EntitySet="Content" />
+            <End Role="SalesFolder" EntitySet="SalesFolder" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SalesFolder_ItemType" Association="Self.FK_SalesFolder_ItemType">
+            <End Role="Item" EntitySet="Item" />
+            <End Role="SalesFolder" EntitySet="SalesFolder" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PardisDemoModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="PardisDemoEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Contents" EntityType="PardisDemoModel.Content" />
+          <EntitySet Name="Files" EntityType="PardisDemoModel.File" />
+          <EntitySet Name="Items" EntityType="PardisDemoModel.Item" />
+          <EntitySet Name="ItemTypes" EntityType="PardisDemoModel.ItemType" />
+          <EntitySet Name="sysdiagrams" EntityType="PardisDemoModel.sysdiagram" />
+          <EntitySet Name="CallForPrices" EntityType="PardisDemoModel.CallForPrice" />
+          <EntitySet Name="Needs" EntityType="PardisDemoModel.Need" />
+          <EntitySet Name="Products" EntityType="PardisDemoModel.Product" />
+          <EntitySet Name="ProductListRelateds" EntityType="PardisDemoModel.ProductListRelated" />
+          <EntitySet Name="SalesFolders" EntityType="PardisDemoModel.SalesFolder" />
+          <EntitySet Name="Accounts" EntityType="PardisDemoModel.Account" />
+          <EntitySet Name="Profiles" EntityType="PardisDemoModel.Profile" />
+          <AssociationSet Name="FK_CallForPrice_Content" Association="PardisDemoModel.FK_CallForPrice_Content">
+            <End Role="Content" EntitySet="Contents" />
+            <End Role="CallForPrice" EntitySet="CallForPrices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_File_Content" Association="PardisDemoModel.FK_File_Content">
+            <End Role="Content" EntitySet="Contents" />
+            <End Role="File" EntitySet="Files" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Need_Content" Association="PardisDemoModel.FK_Need_Content">
+            <End Role="Content" EntitySet="Contents" />
+            <End Role="Need" EntitySet="Needs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_Content" Association="PardisDemoModel.FK_Product_Content">
+            <End Role="Content" EntitySet="Contents" />
+            <End Role="Product" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SalesFolder_Content" Association="PardisDemoModel.FK_SalesFolder_Content">
+            <End Role="Content" EntitySet="Contents" />
+            <End Role="SalesFolder" EntitySet="SalesFolders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CallForPrice_CallForPrice_ShippingPriceType" Association="PardisDemoModel.FK_CallForPrice_CallForPrice_ShippingPriceType">
+            <End Role="Item" EntitySet="Items" />
+            <End Role="CallForPrice" EntitySet="CallForPrices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CallForPrice_ItemType_PriceType" Association="PardisDemoModel.FK_CallForPrice_ItemType_PriceType">
+            <End Role="Item" EntitySet="Items" />
+            <End Role="CallForPrice" EntitySet="CallForPrices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CallForPrice_ItemType_StatusProduct" Association="PardisDemoModel.FK_CallForPrice_ItemType_StatusProduct">
+            <End Role="Item" EntitySet="Items" />
+            <End Role="CallForPrice" EntitySet="CallForPrices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CallForPrice_ItemType_SupplyType" Association="PardisDemoModel.FK_CallForPrice_ItemType_SupplyType">
+            <End Role="Item" EntitySet="Items" />
+            <End Role="CallForPrice" EntitySet="CallForPrices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Item_ItemType" Association="PardisDemoModel.FK_Item_ItemType">
+            <End Role="ItemType" EntitySet="ItemTypes" />
+            <End Role="Item" EntitySet="Items" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductListRelated_Item" Association="PardisDemoModel.FK_ProductListRelated_Item">
+            <End Role="Item" EntitySet="Items" />
+            <End Role="ProductListRelated" EntitySet="ProductListRelateds" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SalesFolder_ItemType" Association="PardisDemoModel.FK_SalesFolder_ItemType">
+            <End Role="Item" EntitySet="Items" />
+            <End Role="SalesFolder" EntitySet="SalesFolders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_ItemType" Association="PardisDemoModel.FK_Product_ItemType">
+            <End Role="ItemType" EntitySet="ItemTypes" />
+            <End Role="Product" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CallForPrice_Product" Association="PardisDemoModel.FK_CallForPrice_Product">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="CallForPrice" EntitySet="CallForPrices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CallForPrice_Profile_supplierProfile" Association="PardisDemoModel.FK_CallForPrice_Profile_supplierProfile">
+            <End Role="Profile" EntitySet="Profiles" />
+            <End Role="CallForPrice" EntitySet="CallForPrices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CallForPrice_SalesFolder" Association="PardisDemoModel.FK_CallForPrice_SalesFolder">
+            <End Role="SalesFolder" EntitySet="SalesFolders" />
+            <End Role="CallForPrice" EntitySet="CallForPrices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Needs_profile" Association="PardisDemoModel.FK_Needs_profile">
+            <End Role="Profile" EntitySet="Profiles" />
+            <End Role="Need" EntitySet="Needs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductListRelated_Product" Association="PardisDemoModel.FK_ProductListRelated_Product">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="ProductListRelated" EntitySet="ProductListRelateds" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductListRelated_SalesFolder" Association="PardisDemoModel.FK_ProductListRelated_SalesFolder">
+            <End Role="SalesFolder" EntitySet="SalesFolders" />
+            <End Role="ProductListRelated" EntitySet="ProductListRelateds" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Account_Profile" Association="PardisDemoModel.FK_Account_Profile">
+            <End Role="Profile" EntitySet="Profiles" />
+            <End Role="Account" EntitySet="Accounts" />
+          </AssociationSet>
+          <AssociationSet Name="ItemCollection" Association="PardisDemoModel.ItemCollection">
+            <End Role="Content" EntitySet="Contents" />
+            <End Role="Item" EntitySet="Items" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Content">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ContentType" Type="Int32" Nullable="false" />
+          <Property Name="CreatorId" Type="Int32" />
+          <Property Name="RegisterDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsDelete" Type="Boolean" />
+          <Property Name="IsArchive" Type="Boolean" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="StateKindeGroup" Type="Int32" />
+          <Property Name="StateKinde" Type="Int32" />
+          <NavigationProperty Name="CallForPrice" Relationship="PardisDemoModel.FK_CallForPrice_Content" FromRole="Content" ToRole="CallForPrice" />
+          <NavigationProperty Name="File" Relationship="PardisDemoModel.FK_File_Content" FromRole="Content" ToRole="File" />
+          <NavigationProperty Name="Need" Relationship="PardisDemoModel.FK_Need_Content" FromRole="Content" ToRole="Need" />
+          <NavigationProperty Name="Product" Relationship="PardisDemoModel.FK_Product_Content" FromRole="Content" ToRole="Product" />
+          <NavigationProperty Name="SalesFolder" Relationship="PardisDemoModel.FK_SalesFolder_Content" FromRole="Content" ToRole="SalesFolder" />
+          <NavigationProperty Name="Items" Relationship="PardisDemoModel.ItemCollection" FromRole="Content" ToRole="Item" />
+        </EntityType>
+        <EntityType Name="File">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Type" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Content" Relationship="PardisDemoModel.FK_File_Content" FromRole="File" ToRole="Content" />
+        </EntityType>
+        <EntityType Name="Item">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NameEn" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="NameFa" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="ItemTypeId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CallForPrices" Relationship="PardisDemoModel.FK_CallForPrice_CallForPrice_ShippingPriceType" FromRole="Item" ToRole="CallForPrice" />
+          <NavigationProperty Name="CallForPrices1" Relationship="PardisDemoModel.FK_CallForPrice_ItemType_PriceType" FromRole="Item" ToRole="CallForPrice" />
+          <NavigationProperty Name="CallForPrices2" Relationship="PardisDemoModel.FK_CallForPrice_ItemType_StatusProduct" FromRole="Item" ToRole="CallForPrice" />
+          <NavigationProperty Name="CallForPrices3" Relationship="PardisDemoModel.FK_CallForPrice_ItemType_SupplyType" FromRole="Item" ToRole="CallForPrice" />
+          <NavigationProperty Name="ItemType" Relationship="PardisDemoModel.FK_Item_ItemType" FromRole="Item" ToRole="ItemType" />
+          <NavigationProperty Name="ProductListRelateds" Relationship="PardisDemoModel.FK_ProductListRelated_Item" FromRole="Item" ToRole="ProductListRelated" />
+          <NavigationProperty Name="SalesFolders" Relationship="PardisDemoModel.FK_SalesFolder_ItemType" FromRole="Item" ToRole="SalesFolder" />
+          <NavigationProperty Name="Contents" Relationship="PardisDemoModel.ItemCollection" FromRole="Item" ToRole="Content" />
+        </EntityType>
+        <EntityType Name="ItemType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NameEn" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="NameFa" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="FlagCustom" Type="Boolean" />
+          <NavigationProperty Name="Items" Relationship="PardisDemoModel.FK_Item_ItemType" FromRole="ItemType" ToRole="Item" />
+          <NavigationProperty Name="Products" Relationship="PardisDemoModel.FK_Product_ItemType" FromRole="ItemType" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="CallForPrice">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="SalesFolderId" Type="Int32" />
+          <Property Name="ProductId" Type="Int32" />
+          <Property Name="ShippingPrice" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="SupplierProfileId" Type="Int32" />
+          <Property Name="DeliveryTime" Type="DateTime" Precision="3" />
+          <Property Name="SupplyTypeId" Type="Int32" />
+          <Property Name="UnitPrice" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="PriceTypeId" Type="Int32" />
+          <Property Name="Count" Type="Int32" />
+          <Property Name="StatusProductId" Type="Int32" />
+          <Property Name="ShippingPriceTypeId" Type="Int32" />
+          <Property Name="ExpiryDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Content" Relationship="PardisDemoModel.FK_CallForPrice_Content" FromRole="CallForPrice" ToRole="Content" />
+          <NavigationProperty Name="Item" Relationship="PardisDemoModel.FK_CallForPrice_CallForPrice_ShippingPriceType" FromRole="CallForPrice" ToRole="Item" />
+          <NavigationProperty Name="Item1" Relationship="PardisDemoModel.FK_CallForPrice_ItemType_PriceType" FromRole="CallForPrice" ToRole="Item" />
+          <NavigationProperty Name="Item2" Relationship="PardisDemoModel.FK_CallForPrice_ItemType_StatusProduct" FromRole="CallForPrice" ToRole="Item" />
+          <NavigationProperty Name="Item3" Relationship="PardisDemoModel.FK_CallForPrice_ItemType_SupplyType" FromRole="CallForPrice" ToRole="Item" />
+          <NavigationProperty Name="Product" Relationship="PardisDemoModel.FK_CallForPrice_Product" FromRole="CallForPrice" ToRole="Product" />
+          <NavigationProperty Name="Profile" Relationship="PardisDemoModel.FK_CallForPrice_Profile_supplierProfile" FromRole="CallForPrice" ToRole="Profile" />
+          <NavigationProperty Name="SalesFolder" Relationship="PardisDemoModel.FK_CallForPrice_SalesFolder" FromRole="CallForPrice" ToRole="SalesFolder" />
+        </EntityType>
+        <EntityType Name="Need">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="title" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="factorneed" Type="Boolean" />
+          <Property Name="factordate" Type="DateTime" Precision="3" />
+          <Property Name="factorip" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="factorby" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="profileid" Type="Int32" Nullable="false" />
+          <Property Name="catid" Type="Int32" Nullable="false" />
+          <Property Name="subcatid" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="sectorid" Type="Int32" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="status" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="confirmby" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="confirmip" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="confirmdate" Type="DateTime" Precision="3" />
+          <Property Name="progress" Type="Int32" />
+          <Property Name="iscampaign" Type="Boolean" />
+          <Property Name="nexttime" Type="Int32" />
+          <Property Name="nextdates" Type="Int32" />
+          <Property Name="laststatusdesc" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="laststatusdescdates" Type="DateTime" Precision="3" />
+          <Property Name="laststatusdescby" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="toclnd" Type="DateTime" Precision="3" />
+          <Property Name="price" Type="Double" />
+          <Property Name="csproviderid" Type="Int32" />
+          <Property Name="editedby" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="editedip" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="editeddate" Type="DateTime" Precision="3" />
+          <Property Name="userid" Type="Int32" />
+          <Property Name="assignby" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="assigndate" Type="DateTime" Precision="3" />
+          <Property Name="departmentid" Type="Int32" />
+          <NavigationProperty Name="Content" Relationship="PardisDemoModel.FK_Need_Content" FromRole="Need" ToRole="Content" />
+          <NavigationProperty Name="Profile" Relationship="PardisDemoModel.FK_Needs_profile" FromRole="Need" ToRole="Profile" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="BrandId" Type="Int32" />
+          <Property Name="Title" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="CategoryId" Type="Int32" />
+          <NavigationProperty Name="Content" Relationship="PardisDemoModel.FK_Product_Content" FromRole="Product" ToRole="Content" />
+          <NavigationProperty Name="ItemType" Relationship="PardisDemoModel.FK_Product_ItemType" FromRole="Product" ToRole="ItemType" />
+          <NavigationProperty Name="CallForPrices" Relationship="PardisDemoModel.FK_CallForPrice_Product" FromRole="Product" ToRole="CallForPrice" />
+          <NavigationProperty Name="ProductListRelateds" Relationship="PardisDemoModel.FK_ProductListRelated_Product" FromRole="Product" ToRole="ProductListRelated" />
+        </EntityType>
+        <EntityType Name="ProductListRelated">
+          <Key>
+            <PropertyRef Name="ProductId" />
+            <PropertyRef Name="SalesFolderId" />
+          </Key>
+          <Property Name="ProductId" Type="Int32" Nullable="false" />
+          <Property Name="SalesFolderId" Type="Int32" Nullable="false" />
+          <Property Name="MeasurementUnitId" Type="Int32" />
+          <Property Name="Amount" Type="Int32" />
+          <NavigationProperty Name="Item" Relationship="PardisDemoModel.FK_ProductListRelated_Item" FromRole="ProductListRelated" ToRole="Item" />
+          <NavigationProperty Name="Product" Relationship="PardisDemoModel.FK_ProductListRelated_Product" FromRole="ProductListRelated" ToRole="Product" />
+          <NavigationProperty Name="SalesFolder" Relationship="PardisDemoModel.FK_ProductListRelated_SalesFolder" FromRole="ProductListRelated" ToRole="SalesFolder" />
+        </EntityType>
+        <EntityType Name="SalesFolder">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="NeedId" Type="Int32" />
+          <Property Name="Subject" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="PriceAnnouncementDeadline" Type="DateTime" Precision="0" />
+          <Property Name="DeliveryDeadline" Type="DateTime" Precision="0" />
+          <Property Name="RequestTypeId" Type="Int32" />
+          <Property Name="WarrantyTerms" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ProfileId" Type="Int32" />
+          <Property Name="ProcessStepId" Type="Int32" />
+          <Property Name="DescriptionLom" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Content" Relationship="PardisDemoModel.FK_SalesFolder_Content" FromRole="SalesFolder" ToRole="Content" />
+          <NavigationProperty Name="Item" Relationship="PardisDemoModel.FK_SalesFolder_ItemType" FromRole="SalesFolder" ToRole="Item" />
+          <NavigationProperty Name="CallForPrices" Relationship="PardisDemoModel.FK_CallForPrice_SalesFolder" FromRole="SalesFolder" ToRole="CallForPrice" />
+          <NavigationProperty Name="ProductListRelateds" Relationship="PardisDemoModel.FK_ProductListRelated_SalesFolder" FromRole="SalesFolder" ToRole="ProductListRelated" />
+        </EntityType>
+        <EntityType Name="Account">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProfileId" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="RoleId" Type="Int32" />
+          <NavigationProperty Name="Profile" Relationship="PardisDemoModel.FK_Account_Profile" FromRole="Account" ToRole="Profile" />
+        </EntityType>
+        <EntityType Name="Profile">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="isperson" Type="Int32" />
+          <Property Name="birthdate" Type="Int32" />
+          <Property Name="birthplace" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="registerdate" Type="DateTime" Precision="3" />
+          <Property Name="fathername" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="uniquename" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="repname" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="code" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="manager" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="idnumber" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="place" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="edulevel" Type="Int32" />
+          <Property Name="edufield" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="job" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="country" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="postalcode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="tel" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="howyouknowid" Type="Int32" />
+          <Property Name="usergroup" Type="Int32" />
+          <Property Name="isProvider" Type="Int32" />
+          <Property Name="acccotactconfirm" Type="Boolean" />
+          <Property Name="iscampaign" Type="Boolean" />
+          <NavigationProperty Name="CallForPrices" Relationship="PardisDemoModel.FK_CallForPrice_Profile_supplierProfile" FromRole="Profile" ToRole="CallForPrice" />
+          <NavigationProperty Name="Needs" Relationship="PardisDemoModel.FK_Needs_profile" FromRole="Profile" ToRole="Need" />
+          <NavigationProperty Name="Accounts" Relationship="PardisDemoModel.FK_Account_Profile" FromRole="Profile" ToRole="Account" />
+        </EntityType>
+        <Association Name="FK_CallForPrice_Content">
+          <End Type="PardisDemoModel.Content" Role="Content" Multiplicity="1" />
+          <End Type="PardisDemoModel.CallForPrice" Role="CallForPrice" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Content">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CallForPrice">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_File_Content">
+          <End Type="PardisDemoModel.Content" Role="Content" Multiplicity="1" />
+          <End Type="PardisDemoModel.File" Role="File" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Content">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="File">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Need_Content">
+          <End Type="PardisDemoModel.Content" Role="Content" Multiplicity="1" />
+          <End Type="PardisDemoModel.Need" Role="Need" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Content">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Need">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product_Content">
+          <End Type="PardisDemoModel.Content" Role="Content" Multiplicity="1" />
+          <End Type="PardisDemoModel.Product" Role="Product" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Content">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SalesFolder_Content">
+          <End Type="PardisDemoModel.Content" Role="Content" Multiplicity="1" />
+          <End Type="PardisDemoModel.SalesFolder" Role="SalesFolder" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Content">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SalesFolder">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CallForPrice_CallForPrice_ShippingPriceType">
+          <End Type="PardisDemoModel.Item" Role="Item" Multiplicity="0..1" />
+          <End Type="PardisDemoModel.CallForPrice" Role="CallForPrice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Item">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CallForPrice">
+              <PropertyRef Name="ShippingPriceTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CallForPrice_ItemType_PriceType">
+          <End Type="PardisDemoModel.Item" Role="Item" Multiplicity="0..1" />
+          <End Type="PardisDemoModel.CallForPrice" Role="CallForPrice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Item">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CallForPrice">
+              <PropertyRef Name="PriceTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CallForPrice_ItemType_StatusProduct">
+          <End Type="PardisDemoModel.Item" Role="Item" Multiplicity="0..1" />
+          <End Type="PardisDemoModel.CallForPrice" Role="CallForPrice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Item">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CallForPrice">
+              <PropertyRef Name="StatusProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CallForPrice_ItemType_SupplyType">
+          <End Type="PardisDemoModel.Item" Role="Item" Multiplicity="0..1" />
+          <End Type="PardisDemoModel.CallForPrice" Role="CallForPrice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Item">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CallForPrice">
+              <PropertyRef Name="SupplyTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Item_ItemType">
+          <End Type="PardisDemoModel.ItemType" Role="ItemType" Multiplicity="1" />
+          <End Type="PardisDemoModel.Item" Role="Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ItemType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Item">
+              <PropertyRef Name="ItemTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductListRelated_Item">
+          <End Type="PardisDemoModel.Item" Role="Item" Multiplicity="0..1" />
+          <End Type="PardisDemoModel.ProductListRelated" Role="ProductListRelated" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Item">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProductListRelated">
+              <PropertyRef Name="MeasurementUnitId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SalesFolder_ItemType">
+          <End Type="PardisDemoModel.Item" Role="Item" Multiplicity="0..1" />
+          <End Type="PardisDemoModel.SalesFolder" Role="SalesFolder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Item">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SalesFolder">
+              <PropertyRef Name="RequestTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product_ItemType">
+          <End Type="PardisDemoModel.ItemType" Role="ItemType" Multiplicity="0..1" />
+          <End Type="PardisDemoModel.Product" Role="Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ItemType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="BrandId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CallForPrice_Product">
+          <End Type="PardisDemoModel.Product" Role="Product" Multiplicity="0..1" />
+          <End Type="PardisDemoModel.CallForPrice" Role="CallForPrice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CallForPrice">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CallForPrice_Profile_supplierProfile">
+          <End Type="PardisDemoModel.Profile" Role="Profile" Multiplicity="0..1" />
+          <End Type="PardisDemoModel.CallForPrice" Role="CallForPrice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Profile">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CallForPrice">
+              <PropertyRef Name="SupplierProfileId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CallForPrice_SalesFolder">
+          <End Type="PardisDemoModel.SalesFolder" Role="SalesFolder" Multiplicity="0..1" />
+          <End Type="PardisDemoModel.CallForPrice" Role="CallForPrice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SalesFolder">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CallForPrice">
+              <PropertyRef Name="SalesFolderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Needs_profile">
+          <End Type="PardisDemoModel.Profile" Role="Profile" Multiplicity="1" />
+          <End Type="PardisDemoModel.Need" Role="Need" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Profile">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Need">
+              <PropertyRef Name="profileid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductListRelated_Product">
+          <End Type="PardisDemoModel.Product" Role="Product" Multiplicity="1" />
+          <End Type="PardisDemoModel.ProductListRelated" Role="ProductListRelated" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProductListRelated">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductListRelated_SalesFolder">
+          <End Type="PardisDemoModel.SalesFolder" Role="SalesFolder" Multiplicity="1" />
+          <End Type="PardisDemoModel.ProductListRelated" Role="ProductListRelated" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SalesFolder">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProductListRelated">
+              <PropertyRef Name="SalesFolderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Account_Profile">
+          <End Type="PardisDemoModel.Profile" Role="Profile" Multiplicity="1" />
+          <End Type="PardisDemoModel.Account" Role="Account" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Profile">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Account">
+              <PropertyRef Name="ProfileId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ItemCollection">
+          <End Type="PardisDemoModel.Content" Role="Content" Multiplicity="*" />
+          <End Type="PardisDemoModel.Item" Role="Item" Multiplicity="*" />
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="PardisDemoModelStoreContainer" CdmEntityContainer="PardisDemoEntities">
+          <EntitySetMapping Name="Contents">
+            <EntityTypeMapping TypeName="PardisDemoModel.Content">
+              <MappingFragment StoreEntitySet="Content">
+                <ScalarProperty Name="StateKinde" ColumnName="StateKinde" />
+                <ScalarProperty Name="StateKindeGroup" ColumnName="StateKindeGroup" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="IsArchive" ColumnName="IsArchive" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+                <ScalarProperty Name="RegisterDate" ColumnName="RegisterDate" />
+                <ScalarProperty Name="CreatorId" ColumnName="CreatorId" />
+                <ScalarProperty Name="ContentType" ColumnName="ContentType" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Files">
+            <EntityTypeMapping TypeName="PardisDemoModel.File">
+              <MappingFragment StoreEntitySet="File">
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Items">
+            <EntityTypeMapping TypeName="PardisDemoModel.Item">
+              <MappingFragment StoreEntitySet="Item">
+                <ScalarProperty Name="ItemTypeId" ColumnName="ItemTypeId" />
+                <ScalarProperty Name="NameFa" ColumnName="NameFa" />
+                <ScalarProperty Name="NameEn" ColumnName="NameEn" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ItemTypes">
+            <EntityTypeMapping TypeName="PardisDemoModel.ItemType">
+              <MappingFragment StoreEntitySet="ItemType">
+                <ScalarProperty Name="FlagCustom" ColumnName="FlagCustom" />
+                <ScalarProperty Name="NameFa" ColumnName="NameFa" />
+                <ScalarProperty Name="NameEn" ColumnName="NameEn" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="PardisDemoModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CallForPrices">
+            <EntityTypeMapping TypeName="PardisDemoModel.CallForPrice">
+              <MappingFragment StoreEntitySet="CallForPrice">
+                <ScalarProperty Name="ExpiryDate" ColumnName="ExpiryDate" />
+                <ScalarProperty Name="ShippingPriceTypeId" ColumnName="ShippingPriceTypeId" />
+                <ScalarProperty Name="StatusProductId" ColumnName="StatusProductId" />
+                <ScalarProperty Name="Count" ColumnName="Count" />
+                <ScalarProperty Name="PriceTypeId" ColumnName="PriceTypeId" />
+                <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+                <ScalarProperty Name="SupplyTypeId" ColumnName="SupplyTypeId" />
+                <ScalarProperty Name="DeliveryTime" ColumnName="DeliveryTime" />
+                <ScalarProperty Name="SupplierProfileId" ColumnName="SupplierProfileId" />
+                <ScalarProperty Name="ShippingPrice" ColumnName="ShippingPrice" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="SalesFolderId" ColumnName="SalesFolderId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Needs">
+            <EntityTypeMapping TypeName="PardisDemoModel.Need">
+              <MappingFragment StoreEntitySet="Need">
+                <ScalarProperty Name="departmentid" ColumnName="departmentid" />
+                <ScalarProperty Name="assigndate" ColumnName="assigndate" />
+                <ScalarProperty Name="assignby" ColumnName="assignby" />
+                <ScalarProperty Name="userid" ColumnName="userid" />
+                <ScalarProperty Name="editeddate" ColumnName="editeddate" />
+                <ScalarProperty Name="editedip" ColumnName="editedip" />
+                <ScalarProperty Name="editedby" ColumnName="editedby" />
+                <ScalarProperty Name="csproviderid" ColumnName="csproviderid" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="toclnd" ColumnName="toclnd" />
+                <ScalarProperty Name="laststatusdescby" ColumnName="laststatusdescby" />
+                <ScalarProperty Name="laststatusdescdates" ColumnName="laststatusdescdates" />
+                <ScalarProperty Name="laststatusdesc" ColumnName="laststatusdesc" />
+                <ScalarProperty Name="nextdates" ColumnName="nextdates" />
+                <ScalarProperty Name="nexttime" ColumnName="nexttime" />
+                <ScalarProperty Name="iscampaign" ColumnName="iscampaign" />
+                <ScalarProperty Name="progress" ColumnName="progress" />
+                <ScalarProperty Name="confirmdate" ColumnName="confirmdate" />
+                <ScalarProperty Name="confirmip" ColumnName="confirmip" />
+                <ScalarProperty Name="confirmby" ColumnName="confirmby" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="sectorid" ColumnName="sectorid" />
+                <ScalarProperty Name="subcatid" ColumnName="subcatid" />
+                <ScalarProperty Name="catid" ColumnName="catid" />
+                <ScalarProperty Name="profileid" ColumnName="profileid" />
+                <ScalarProperty Name="factorby" ColumnName="factorby" />
+                <ScalarProperty Name="factorip" ColumnName="factorip" />
+                <ScalarProperty Name="factordate" ColumnName="factordate" />
+                <ScalarProperty Name="factorneed" ColumnName="factorneed" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Products">
+            <EntityTypeMapping TypeName="PardisDemoModel.Product">
+              <MappingFragment StoreEntitySet="Product">
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="BrandId" ColumnName="BrandId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductListRelateds">
+            <EntityTypeMapping TypeName="PardisDemoModel.ProductListRelated">
+              <MappingFragment StoreEntitySet="ProductListRelated">
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="MeasurementUnitId" ColumnName="MeasurementUnitId" />
+                <ScalarProperty Name="SalesFolderId" ColumnName="SalesFolderId" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SalesFolders">
+            <EntityTypeMapping TypeName="PardisDemoModel.SalesFolder">
+              <MappingFragment StoreEntitySet="SalesFolder">
+                <ScalarProperty Name="DescriptionLom" ColumnName="DescriptionLom" />
+                <ScalarProperty Name="ProcessStepId" ColumnName="ProcessStepId" />
+                <ScalarProperty Name="ProfileId" ColumnName="ProfileId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="WarrantyTerms" ColumnName="WarrantyTerms" />
+                <ScalarProperty Name="RequestTypeId" ColumnName="RequestTypeId" />
+                <ScalarProperty Name="DeliveryDeadline" ColumnName="DeliveryDeadline" />
+                <ScalarProperty Name="PriceAnnouncementDeadline" ColumnName="PriceAnnouncementDeadline" />
+                <ScalarProperty Name="Subject" ColumnName="Subject" />
+                <ScalarProperty Name="NeedId" ColumnName="NeedId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Accounts">
+            <EntityTypeMapping TypeName="PardisDemoModel.Account">
+              <MappingFragment StoreEntitySet="Account">
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="ProfileId" ColumnName="ProfileId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Profiles">
+            <EntityTypeMapping TypeName="PardisDemoModel.Profile">
+              <MappingFragment StoreEntitySet="Profile">
+                <ScalarProperty Name="iscampaign" ColumnName="iscampaign" />
+                <ScalarProperty Name="acccotactconfirm" ColumnName="acccotactconfirm" />
+                <ScalarProperty Name="isProvider" ColumnName="isProvider" />
+                <ScalarProperty Name="usergroup" ColumnName="usergroup" />
+                <ScalarProperty Name="howyouknowid" ColumnName="howyouknowid" />
+                <ScalarProperty Name="comment" ColumnName="comment" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="tel" ColumnName="tel" />
+                <ScalarProperty Name="postalcode" ColumnName="postalcode" />
+                <ScalarProperty Name="country" ColumnName="country" />
+                <ScalarProperty Name="job" ColumnName="job" />
+                <ScalarProperty Name="edufield" ColumnName="edufield" />
+                <ScalarProperty Name="edulevel" ColumnName="edulevel" />
+                <ScalarProperty Name="place" ColumnName="place" />
+                <ScalarProperty Name="idnumber" ColumnName="idnumber" />
+                <ScalarProperty Name="manager" ColumnName="manager" />
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="repname" ColumnName="repname" />
+                <ScalarProperty Name="uniquename" ColumnName="uniquename" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="fathername" ColumnName="fathername" />
+                <ScalarProperty Name="registerdate" ColumnName="registerdate" />
+                <ScalarProperty Name="birthplace" ColumnName="birthplace" />
+                <ScalarProperty Name="birthdate" ColumnName="birthdate" />
+                <ScalarProperty Name="isperson" ColumnName="isperson" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="ItemCollection" TypeName="PardisDemoModel.ItemCollection" StoreEntitySet="ItemCollection">
+            <EndProperty Name="Item">
+              <ScalarProperty Name="Id" ColumnName="ItemId" />
+            </EndProperty>
+            <EndProperty Name="Content">
+              <ScalarProperty Name="Id" ColumnName="ContentId" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

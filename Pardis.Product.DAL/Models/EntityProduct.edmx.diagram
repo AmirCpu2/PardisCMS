@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="266316cf238f487599164a2ef771b3ce" Name="Diagram1" ZoomLevel="89">
+        <EntityTypeShape EntityType="PardisDemoModel.Content" Width="1.5" PointX="0.75" PointY="14.375" />
+        <EntityTypeShape EntityType="PardisDemoModel.File" Width="1.5" PointX="3" PointY="41.75" />
+        <EntityTypeShape EntityType="PardisDemoModel.Item" Width="1.5" PointX="6" PointY="10.625" />
+        <EntityTypeShape EntityType="PardisDemoModel.ItemType" Width="1.5" PointX="3.75" PointY="11.25" />
+        <EntityTypeShape EntityType="PardisDemoModel.sysdiagram" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="PardisDemoModel.CallForPrice" Width="1.5" PointX="11.25" PointY="13.75" />
+        <EntityTypeShape EntityType="PardisDemoModel.Need" Width="1.5" PointX="9" PointY="12.5" />
+        <EntityTypeShape EntityType="PardisDemoModel.Product" Width="1.5" PointX="6" PointY="14.875" />
+        <EntityTypeShape EntityType="PardisDemoModel.ProductListRelated" Width="1.5" PointX="11.25" PointY="10.25" />
+        <EntityTypeShape EntityType="PardisDemoModel.SalesFolder" Width="1.5" PointX="3" PointY="14.375" />
+        <EntityTypeShape EntityType="PardisDemoModel.Account" Width="1.5" PointX="11.25" PointY="7.25" />
+        <EntityTypeShape EntityType="PardisDemoModel.Profile" Width="1.5" PointX="9" PointY="4.875" />
+        <AssociationConnector Association="PardisDemoModel.FK_CallForPrice_Content" />
+        <AssociationConnector Association="PardisDemoModel.FK_File_Content" />
+        <AssociationConnector Association="PardisDemoModel.FK_Need_Content" />
+        <AssociationConnector Association="PardisDemoModel.FK_Product_Content" />
+        <AssociationConnector Association="PardisDemoModel.FK_SalesFolder_Content" />
+        <AssociationConnector Association="PardisDemoModel.FK_CallForPrice_CallForPrice_ShippingPriceType" />
+        <AssociationConnector Association="PardisDemoModel.FK_CallForPrice_ItemType_PriceType" />
+        <AssociationConnector Association="PardisDemoModel.FK_CallForPrice_ItemType_StatusProduct" />
+        <AssociationConnector Association="PardisDemoModel.FK_CallForPrice_ItemType_SupplyType" />
+        <AssociationConnector Association="PardisDemoModel.FK_Item_ItemType" />
+        <AssociationConnector Association="PardisDemoModel.FK_ProductListRelated_Item" />
+        <AssociationConnector Association="PardisDemoModel.FK_SalesFolder_ItemType" />
+        <AssociationConnector Association="PardisDemoModel.FK_Product_ItemType" />
+        <AssociationConnector Association="PardisDemoModel.FK_CallForPrice_Product" />
+        <AssociationConnector Association="PardisDemoModel.FK_CallForPrice_Profile_supplierProfile" />
+        <AssociationConnector Association="PardisDemoModel.FK_CallForPrice_SalesFolder" />
+        <AssociationConnector Association="PardisDemoModel.FK_Needs_profile" />
+        <AssociationConnector Association="PardisDemoModel.FK_ProductListRelated_Product" />
+        <AssociationConnector Association="PardisDemoModel.FK_ProductListRelated_SalesFolder" />
+        <AssociationConnector Association="PardisDemoModel.FK_Account_Profile" />
+        <AssociationConnector Association="PardisDemoModel.ItemCollection" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

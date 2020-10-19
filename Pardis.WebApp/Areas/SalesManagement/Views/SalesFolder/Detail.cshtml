@@ -1,0 +1,28 @@
+﻿@model Pardis.Product.BLL.ViewModel.SalesFolder
+
+
+
+<div class="row">
+    <div class="col-md-12">
+        <dl>
+            <dt>@(Html.LabelFor(Model => Model.Subject)):</dt>
+            <dd>@(Model.Subject)</dd>
+            <dt>@(Html.LabelFor(Model => Model.NeedFa)):</dt>
+            <dd>@(Model.NeedFa)</dd>
+            <dt>@(Html.LabelFor(Model => Model.PriceAnnouncementDeadlineFa)):</dt>
+            <dd>@(Model.PriceAnnouncementDeadlineFa)</dd>
+            <dt>@(Html.LabelFor(Model => Model.DeliveryDeadlineFa)):</dt>
+            <dd>@(Model.DeliveryDeadlineFa)</dd>
+            <dt>@(Html.LabelFor(Model => Model.RegisterDateFa)):</dt>
+            <dd>@(Model.RegisterDateFa)</dd>
+            <dt>@(Html.LabelFor(Model => Model.RequestTypeFa)):</dt>
+            <dd>@(Model.RequestTypeFa)</dd>
+        </dl>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        @{Html.RenderAction("ShowWorFlowByContentId", "WorkFlow", new { area = "Public", contentId = Model.Id });}
+    </div>
+</div>

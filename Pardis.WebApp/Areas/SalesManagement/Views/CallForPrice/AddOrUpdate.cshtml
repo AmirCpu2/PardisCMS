@@ -1,0 +1,573 @@
+﻿@model  Pardis.Product.BLL.ViewModel.CallForPriceVM
+
+@{
+    ViewBag.Title = "استعلام قیمت";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    int SalsFoldeId = ViewBag?.SalsFoldeId ?? 0;
+    var list = Model?.CallForPrices;
+}
+
+@section HeadersCustom
+{
+    <link rel="stylesheet" href="~/Content/plugins/datatables/dataTables.bootstrap4.css">
+}
+
+<div class="container-fluid">
+
+    @{Html.RenderAction("ShowWorFlowByContentId", "WorkFlow", new { area = "Public", contentId = SalsFoldeId });}
+
+    <!-- Main row -->
+    <div class="row">
+        <!-- Left col -->
+        <section class="col-lg col-12">
+            <div class="row title-custom ">
+                <h2>
+                    @ViewBag.Title
+                </h2>
+            </div>
+            <div class="card card-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        @{Html.RenderAction(MVC.SalesManagement.SalesFolder.ActionNames.DetailOnTopPage, MVC.SalesManagement.SalesFolder.Name, new { area = MVC.SalesManagement.Name, folderId = SalsFoldeId });}
+                    </div>
+                </div>
+
+                @using (Html.BeginForm(MVC.SalesManagement.ProductRelated.AddOrUpdate(), FormMethod.Post, new { @class = "login100-form validate-form", @Id = "CallForPriceForm" }))
+                {
+
+                    <div class="row">
+                        <section class="col-md-11" style="margin-right:55px; margin-top:10px; margin-bottom:10px;">
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>
+                                            استعلام کالا فقط برای این پرونده
+                                        </label>
+                                        <div class="form-group">
+
+                                            <label>
+                                                بله
+                                                <input type="radio" name="r1" class="minimal" value="yes" checked>
+                                            </label>
+                                            <label>
+                                                خیر
+                                                <input type="radio" name="r1" class="minimal" value="no">
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.CallForPrice.SupplierProfileId)
+                                        @Html.ValidationMessageFor(model => model.CallForPrice.SupplierProfileId, "*", new { @class = "text-danger" })
+                                        @Html.DropDownListFor(model => model.CallForPrice.SupplierProfileId, new List<SelectListItem>() { }, "-",
+                                         new Dictionary<string, Object>
+                                         {
+                                                { "id", "SupplierProfileId" },
+                                                { "name", "SupplierProfileId" },
+                                                { "class","form-control input-style select-box-style width-select-style select2" },
+                                                {"data-search","true"}
+                                         })
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.CallForPrice.ProductId)
+                                        @Html.ValidationMessageFor(model => model.CallForPrice.ProductId, "*", new { @class = "text-danger" })
+                                        @Html.DropDownListFor(model => model.CallForPrice.ProductId, new List<SelectListItem>() { }, "-",
+                                         new Dictionary<string, Object>
+                                         {
+                                                { "id", "ProductId" },
+                                                { "name", "ProductId" },
+                                                { "class","form-control select2" },
+                                                {"data-search","true"}
+                                         })
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.CallForPrice.SalesFolderId)
+                                        @Html.ValidationMessageFor(model => model.CallForPrice.SalesFolderId, "*", new { @class = "text-danger" })
+                                        @Html.DropDownListFor(model => model.CallForPrice.SalesFolderId, new List<SelectListItem>() { }, "-",
+                                         new Dictionary<string, Object>
+                                         {
+                                                { "id", "SalesFolderId" },
+                                                { "name", "SalesFolderId" },
+                                                { "class","form-control input-style select-box-style width-select-style select2" },
+                                                {"data-search","true"}
+                                         })
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.CallForPrice.StatusProductId)
+                                        @Html.ValidationMessageFor(model => model.CallForPrice.StatusProductId, "*", new { @class = "text-danger" })
+                                        @Html.DropDownListFor(model => model.CallForPrice.StatusProductId, new List<SelectListItem>() { }, "-",
+                                         new Dictionary<string, Object>
+                                         {
+                                                { "id", "StatusProductId" },
+                                                { "name", "StatusProductId" },
+                                                { "class","form-control select2" },
+                                                {"data-search","true"}
+                                         })
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.CallForPrice.UnitPrice)
+                                        @Html.ValidationMessageFor(model => model.CallForPrice.UnitPrice, "*", new { @class = "text-danger" })
+                                        @Html.TextBoxFor(model => model.CallForPrice.UnitPrice, new { @class = "form-control", @Id = "UnitPrice", @type = "Number", @min = 0 })
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.CallForPrice.PriceTypeId)
+                                        @Html.ValidationMessageFor(model => model.CallForPrice.PriceTypeId, "*", new { @class = "text-danger" })
+                                        @Html.DropDownListFor(model => model.CallForPrice.PriceTypeId, new List<SelectListItem>() { }, "-",
+                                         new Dictionary<string, Object>
+                                         {
+                                                { "id", "PriceTypeId" },
+                                                { "name", "PriceTypeId" },
+                                                { "class","form-control input-style select-box-style width-select-style select2" },
+                                                {"data-search","true"}
+                                         })
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.CallForPrice.Count)
+                                        @Html.ValidationMessageFor(model => model.CallForPrice.Count, "*", new { @class = "text-danger" })
+                                        @Html.TextBoxFor(model => model.CallForPrice.Count, new { @class = "form-control", @Id = "Count", @type = "Number", @min = 1 })
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.CallForPrice.SupplyTypeId)
+                                        @Html.ValidationMessageFor(model => model.CallForPrice.SupplyTypeId, "*", new { @class = "text-danger" })
+                                        @Html.DropDownListFor(model => model.CallForPrice.SupplyTypeId, new List<SelectListItem>() { }, "-",
+                                        new Dictionary<string, Object>
+                                        {
+                                            { "id", "SupplyTypeId" },
+                                            { "name", "SupplyTypeId" },
+                                            { "class", "form-control select2" },
+                                            {"data-search", "true"}
+                                        })
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="row">
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.CallForPrice.DeliveryTime)
+                                        @Html.ValidationMessageFor(model => model.CallForPrice.DeliveryTime, "*", new { @class = "text-danger" })
+                                        <div class="input-group">
+                                            @Html.TextBoxFor(model => model.CallForPrice.DeliveryTime, new { @Id="DeliveryTime", @class = "locale-fa form-control" })
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">
+                                                    <i class="fa fa-calendar"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.CallForPrice.ExpiryDate)
+                                        @Html.ValidationMessageFor(model => model.CallForPrice.ExpiryDate, "*", new { @class = "text-danger" })
+                                        <div class="input-group">
+                                            @Html.TextBoxFor(model => model.CallForPrice.ExpiryDate, new { @Id= "ExpiryDate", @class = "locale-fa form-control" })
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">
+                                                    <i class="fa fa-calendar"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="row">
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.CallForPrice.ShippingPrice)
+                                        @Html.ValidationMessageFor(model => model.CallForPrice.ShippingPrice, "", new { @class = "text-danger" })
+                                        @Html.TextBoxFor(model => model.CallForPrice.ShippingPrice, new { @class = "form-control", @Id = "ShippingPrice", @type = "Number", @min = 1 })
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.CallForPrice.ShippingPriceTypeId)
+                                        @Html.ValidationMessageFor(model => model.CallForPrice.ShippingPriceTypeId, "", new { @class = "text-danger" })
+                                        @Html.DropDownListFor(model => model.CallForPrice.ShippingPriceTypeId, new List<SelectListItem>() { }, "-",
+                                        new Dictionary<string, Object>
+                                        {
+                                            { "id", "ShippingPriceTypeId" },
+                                            { "name", "ShippingPriceTypeId" },
+                                            { "class", "form-control select2" },
+                                            {"data-search", "true"}
+                                        })
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.CallForPrice.Description)
+                                        @Html.ValidationMessageFor(model => model.CallForPrice.Description, "", new { @class = "text-danger" })
+                                        <div class="mb-3">
+                                            @Html.TextAreaFor(model => model.CallForPrice.Description, new
+                                            {
+                                                @id = "editor1",
+                                                @name = "editor1",
+                                                @style = "width: 100%"
+                                            })
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="exampleInputFile">بارگذاری سند پیش فاکتور</label>
+                                        <div class="input-group">
+                                            <div class="custom-file">
+                                                <input type="file" class="custom-file-input" id="exampleInputFile">
+                                                <label class="custom-file-label" for="exampleInputFile" id="exampleLableFile">انتخاب فایل</label>
+                                            </div>
+                                            <div class="input-group-append">
+                                                <button type="button" class="input-group-text btn btn-default" id="uploadFile">Upload</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-12">
+                                    <button type="button" class="btn btn-success float-left" id="PlusBtn">
+                                        <i class="fa fa-plus" aria-hidden="true"></i>
+                                        افزودن
+                                    </button>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                }
+                <div>
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                        <table id="ProductTable" class="table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        عنوان محصول
+                                    </th>
+                                    <th>
+                                        عنوان درخواست
+                                    </th>
+                                    <th>
+                                        قیمت واحد
+                                    </th>
+                                    <th>
+                                        مقدار/تعداد
+                                    </th>
+                                    <th>
+                                        قیمت کل
+                                    </th>
+                                    <th>
+                                        وضعیت کالا
+                                    </th>
+                                    <th>
+                                        تاریخ اعتبار قیمت
+                                    </th>
+                                    <th>
+                                        عملیات
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (list != null)
+                                {
+                                    int i = 0;
+                                    foreach (var item in list)
+                                    {
+                                        @*<tr>
+                                                <td id="@item.ProductId">@(item?.ProductFa)</td>
+                                                <td id="@item.MeasurementUnitId">@(item?.MeasurementUnitFa)</td>
+                                                <td>@(item?.Amount)</td>
+                                                <td><button type="button" class="btn redBtn" onClick="deleteRow(@(i++))"><i class="fa fa-trash" aria-hidden="true"></i></button></td>
+                                            </tr>*@
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                        <div class="tableNoContent">
+                            <span>
+                                موردی ثبت نشده است
+                            </span>
+                        </div>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+
+
+
+                <div class="row">
+                    <div class="col-12">
+                        <button type="button" id="submitBtn" class="btn btn-success float-left">
+                            تاييد
+                        </button>
+                        <a href="@Url.Action(MVC.SalesManagement.SalesFolder.Index())" type="button" class="btn btn-primary float-left ml-2" style="margin-right: 5px;">
+                            بازگشت
+                        </a>
+                    </div>
+                </div>
+
+
+            </div>
+        </section>
+    </div>
+    <!-- /.row (main row) -->
+</div><!-- /.container-fluid -->
+
+@section Scripts
+{
+    <script src="~/Content/plugins/datatables/jquery.dataTables.js"></script>
+    <script src="~/Content/plugins/datatables/dataTables.bootstrap4.js"></script>
+    <script>
+        //init value
+        ProductReletedList = [];
+
+        //init public function
+        var updateList = function () {
+            stringList = "";
+
+            ProductReletedList.forEach(function (value, index) {
+                console.log(value);
+                stringList += `<tr>
+                                        <td id="${value['ProductId']}">${value['ProductFa']}</td>
+                                        <td id="${value['SalesFolderId']}">${value['SalesFolderFa']}</td>
+                                        <td>${value['UnitPrice']}</td>
+                                        <td>${value['Count']}</td>
+                                        <td>${parseInt(value['Count']) * parseInt(value['UnitPrice'])}</td>
+                                        <td id="${value['StatusProductId']}">${value['StatusProductFa']}</td>
+                                        <td>${value['ExpiryDateFa']}</td>
+                                        <td><button type="button" class="btn redBtn" onClick="deleteRow(${index})"><i class="fa fa-trash" aria-hidden="true"></i></button></td>
+                                    </tr>`;
+            });
+
+            $("#ProductTable > tbody").html(stringList);
+
+            if (ProductReletedList.length > 0)
+                $('div.tableNoContent').fadeOut();
+            else
+                $('div.tableNoContent').fadeIn();
+
+        }
+
+        var deleteRow = function (index) {
+
+            ProductReletedList.splice(parseInt(index), 1);
+
+            updateList();
+        }
+
+        $(function () {
+
+            FillItemsByTypeNameEn("StatusProduct", "#StatusProductId", '10');
+            FillItemsByTypeNameEn("SupplyType", "#SupplyTypeId", '20');
+            FillItemsByTypeNameEn("PriceType", "#PriceTypeId", '17');
+            FillItemsByTypeNameEn("PriceType", "#ShippingPriceTypeId", '');
+
+            FillDropDownList("@Url.Action(MVC.Public.Profile.FillProfileCustommers())", "#SupplierProfileId",'@(Model?.CallForPrice?.SupplierProfileId??0)');
+
+            FillDropDownList("@Url.Action(MVC.Public.Product.FillProductByFolderId(SalsFoldeId))", "#ProductId", '');
+
+            FillDropDownList("@Url.Action(MVC.SalesManagement.SalesFolder.GetAllSalesFolder())", "#SalesFolderId", '@(SalsFoldeId)');
+
+            $('#SalesFolderId').prop("disabled", true);
+
+
+            $("input[name='r1']").change(function () {
+
+                var statusRadio = $("input[name='r1']:checked").val();
+
+                if (statusRadio == "no") {
+                    FillSearchingDropDownList("@Url.Action(MVC.Public.Product.FillProductSearching())", "#ProductId", '');
+                    $('#SalesFolderId').prop("disabled", false);
+                    $("#select2-SalesFolderId-container").text("-");
+                }
+                else {
+                    FillSearchingDropDownList("@Url.Action(MVC.Public.Product.FillProductByFolderId(SalsFoldeId))", "#ProductId", '');
+
+                    FillDropDownList("@Url.Action(MVC.SalesManagement.SalesFolder.GetAllSalesFolder())", "#SalesFolderId", '@(SalsFoldeId)');
+
+                    $('#SalesFolderId').prop("disabled", true);
+
+                }
+
+
+            });
+
+            //Product Change => Filter SalesFolder
+            $("#ProductId").change(function () {
+                var statusRadio = $("input[name='r1']:checked").val();
+
+                if (statusRadio == "yes") {
+                    return;
+                }
+
+                var url = "@Url.Action(MVC.SalesManagement.SalesFolder.GetAllSalesFolderByProductId(123456))";
+                var id = $("#ProductId").val();
+
+                if (!(parseInt(id) > 1))
+                    return;
+
+                FillDropDownList(url.replace("123456", id), "#SalesFolderId", '@(SalsFoldeId)');
+
+                $("#select2-SalesFolderId-container").text("-");
+            });
+
+            //init event
+            $('#submitBtn').on('click', function () {
+                var url = '/Pardis/SalesManagement/CallForPrice/AddOrUpdate/';
+
+                //check model
+                if (ProductReletedList.length < 1) {
+                    modalAlert('عملیات', 'فرم به درستی تکمیل نشده است.');
+                    return;
+                }
+
+
+                var finallyModel = { "CallForPrices": ProductReletedList, "SalesFolderId": '@SalsFoldeId' }
+
+
+                AjaxModelSubmit(JSON.stringify(finallyModel).toString(), url, function (response) {
+
+                    if (response > 0) {
+                        //location = "@Url.Action(MVC.SalesManagement.SalesFolder.ActionNames.Index,MVC.SalesManagement.SalesFolder.Name, new { @area = MVC.SalesManagement.Name, @Id = SalsFoldeId })";
+                        location = "@Url.Action(MVC.SalesManagement.SalesFolder.Index(SalsFoldeId))";
+                    }
+                }, false);
+
+            });
+
+            //insert Btn
+            $('#PlusBtn').on("click", function () {
+
+                var flag = 0;
+
+                if (!($('#ProductId').val() > 1)) {
+
+                    modalAlert("عملیات", "موارد به درستی تکمیل نشده اند.");
+
+                    return;
+                }
+
+                ProductReletedList.forEach(function (value, index) {
+
+                    if (value["ProductId"] == $('#ProductId').val() && value["SalesFolderId"] == $('#SalesFolderId').val() && value["SupplierProfileId"] == $('#SupplierProfileId').val() ) {
+                        modalAlert("عملیات", "کالا به درستی انتخاب نشده است.");
+
+                        flag++;
+                        return;
+                    }
+
+                });
+
+                if (flag > 0)
+                    return;
+
+                ProductReletedList.push({
+                    'SupplierProfileId': $('#SupplierProfileId').val(),
+                    'SupplierProfileFa': $('#select2-SupplierProfileId-container').text(),
+
+                    'ProductId': $('#ProductId').val(),
+                    'ProductFa': $('#select2-ProductId-container').text(),
+
+                    'SalesFolderId': $('#SalesFolderId').val(),
+                    'SalesFolderFa': $('#select2-SalesFolderId-container').text(),
+
+                    'StatusProductId': $('#StatusProductId').val(),
+                    'StatusProductFa': $('#select2-StatusProductId-container').text(),
+
+                    'UnitPrice': $('#UnitPrice').val(),
+
+                    'PriceTypeId': $('#PriceTypeId').val(),
+                    'PriceTypeFa': $('#select2-PriceTypeId-container').text(),
+
+                    'Count': $('#Count').val(),
+
+                    'SupplyTypeId': $('#SupplyTypeId').val(),
+                    'SupplyTypeFa': $('#select2-SupplyTypeId-container').text(),
+
+                    'DeliveryTimeFa': $('#DeliveryTime').val(),
+
+                    'ExpiryDateFa': $('#ExpiryDate').val(),
+
+                    'ShippingPrice': $('#ShippingPrice').val(),
+
+                    'ShippingPriceTypeId': $('#ShippingPriceTypeId').val(),
+                    'ShippingPriceTypeFa': $('#select2-ShippingPriceTypeId-container').text(),
+
+                    'editor1': $('.ck.ck-editor__main').text(),
+                });
+
+                updateList();
+
+                //clear DropDownLists :)
+                $('#CallForPriceForm')[0].reset();
+                $('#ProductId').val('0').trigger('change');
+                //$('#SupplierProfileId').val('0').trigger('change');
+                //$('#SalesFolderId').val('0').trigger('change');
+                $('#StatusProductId').val('0').trigger('change');
+                $('#PriceTypeId').val('0').trigger('change');
+                $('#SupplyTypeId').val('0').trigger('change');
+                $('#ShippingPriceTypeId').val('0').trigger('change');
+                //$('.ck.ck-editor__main').text("");
+            });
+
+            //Fake Action
+            $('#uploadFile').on("click", function () {
+                setTimeout(() => {
+                    modalAlert('عملیات', 'عملیات بارگذاری با موفقیت انجام شد.');
+                }, 2000);
+            });
+
+            $('#exampleInputFile').on("change", function () {
+                $('#exampleLableFile').text($('#exampleInputFile').val());
+            });
+
+        });
+
+
+    </script>
+}
