@@ -65,6 +65,10 @@ body {
     margin-bottom: 60px;
 }
 
+body.sidebar-mini.modal-open {
+    padding-right:inherit !important;
+} 
+
 .footer {
     position: absolute;
     bottom: 0;
